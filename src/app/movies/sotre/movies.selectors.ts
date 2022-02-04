@@ -12,3 +12,8 @@ export const getLoading = createSelector(
     getMoviesState,
     (state: MoviesState) => state.loading
 )
+
+export const getError = createSelector(
+    getMoviesState,
+    (state: MoviesState) => state.error
+)

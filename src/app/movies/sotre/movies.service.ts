@@ -23,4 +23,7 @@ export class MoviesService {
         return this.store.select(MoviesSelectors.getLoading)
     }
 
+    hasError$(): Observable<string> {
+        return this.store.select(MoviesSelectors.getError)
+    }
 }
