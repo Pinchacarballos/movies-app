@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Movie } from '../../movies/model/movie'
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.scss']
 })
-export class MovieComponent implements OnInit {
+export class MovieComponent {
+  @Input('movie') movie: Movie
+  @Output('movieSelected') onSelectMovie = new EventEmitter<Movie>()
 
-  constructor() { }
-
-  ngOnInit(): void {
+  openMovie() {
+    this.onSelectMovie.emit(this.movie)
   }
-
 }

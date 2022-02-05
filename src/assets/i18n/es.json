@@ -1,5 +1,5 @@
 {
-    "movies": "Películas",
-    "menu": "Menú",
-    "loadMoviesError": "Se ha producido un error al cargar la lista de películas"
+  "movies": "Películas",
+  "menu": "Menú",
+  "loadMoviesError": "Se ha producido un error al cargar la lista de películas"
 }

@@ -1,1 +1,15 @@
-<p>movie works!</p>
+<mat-card matRipple (click)="openMovie()" class="clickable">
+  <mat-card-title class="movie-title">{{ movie.title }}</mat-card-title>
+  <mat-card-content>
+    <img
+      class="movie-poster"
+      onerror="this.src='assets/img/default-placeholder.png'"
+      [src]="movie.poster ? movie.poster : 'assets/img/default-placeholder.png'"
+    />
+  </mat-card-content>
+  <mat-card-footer class="movie-footer">
+    <mat-chip-list>
+      <mat-chip *ngFor="let genre of movie.genre">#{{ genre }}</mat-chip>
+    </mat-chip-list>
+  </mat-card-footer>
+</mat-card>

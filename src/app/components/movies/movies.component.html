@@ -1,3 +1,21 @@
-<p>movies works!</p>
 <app-loader *ngIf="loading$ | async"></app-loader>
-<p *ngFor="let movie of movies$ | async">{{ movie.title }}</p>
+<div class="container" fxFlex="0 0 100" fxLayout="row" fxLayoutAlign="center">
+  <div
+    class="item"
+    *ngFor="let movie of movies$ | async"
+    fxFlex.xl="0 0 15"
+    fxFlex.lg="0 0 25"
+    fxFlex.md="0 0 30"
+    fxFlex.sm="0 0 50"
+    fxFlex.xs="0 0 100"
+  >
+    <app-movie
+      fxFlex="0 0 100"
+      [movie]="movie"
+      (movieSelected)="openMovie($event)"
+    ></app-movie>
+  </div>
+  <button mat-fab class="floating-button" color="primary" (click)="addMovie()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

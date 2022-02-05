@@ -1,0 +1,14 @@
+.item {
+  padding: 2vh;
+}
+
+.container {
+  padding: 1vh;
+  flex-wrap: wrap;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+}

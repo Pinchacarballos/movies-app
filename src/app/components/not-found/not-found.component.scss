@@ -1,8 +1,8 @@
-$gb: #F2EEE8;
-$wh: #FFFFFF;
-$dark: #383A41;
-$red: #EB6D6D;
-$blue: #5E7FDC;
+$gb: #f2eee8;
+$wh: #ffffff;
+$dark: #383a41;
+$red: #eb6d6d;
+$blue: #5e7fdc;
 
 $break: 400px;
 
@@ -33,7 +33,7 @@ body {
 
   @media screen and (max-width: $break) {
     margin-top: 40px;
-    transform: scale(.8);
+    transform: scale(0.8);
   }
 
   .band {
@@ -63,7 +63,7 @@ body {
     }
 
     &:before {
-      content: "";
+      content: '';
       display: inline-block;
       height: 27px;
       width: 30px;
@@ -73,7 +73,7 @@ body {
     }
 
     &:after {
-      content: "";
+      content: '';
       display: inline-block;
       height: 27px;
       width: 30px;
@@ -91,7 +91,7 @@ body {
     margin-top: 40px;
 
     &:before {
-      content: "";
+      content: '';
       display: inline-block;
       width: 30px;
       height: 15px;
@@ -103,7 +103,7 @@ body {
     }
 
     &:after {
-      content: "";
+      content: '';
       display: inline-block;
       width: 30px;
       height: 15px;
@@ -121,7 +121,7 @@ body {
     margin-top: 15px;
 
     &:before {
-      content: "";
+      content: '';
       display: inline-block;
       width: 10px;
       height: 10px;
@@ -131,7 +131,7 @@ body {
     }
 
     &:after {
-      content: "";
+      content: '';
       display: inline-block;
       width: 10px;
       height: 10px;
@@ -168,7 +168,7 @@ h1 {
 .btn {
   font-weight: 400;
   padding: 20px 50px;
-  background-color: rgba($blue, 1.0);
+  background-color: rgba($blue, 1);
   color: white;
   font-size: 1.2em;
   border-radius: 5px;
@@ -183,6 +183,6 @@ h1 {
 
   &:hover {
     background-color: rgba($blue, 0.8);
-    transition: all .2s linear;
+    transition: all 0.2s linear;
   }
 }

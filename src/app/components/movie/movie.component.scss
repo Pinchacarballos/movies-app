@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+
+.movie-poster {
+  width: 100%;
+}
+
+.movie-title {
+  font-size: 10dp;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-footer {
+  padding: 1vh 2vh;
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    @include mat-elevation(8);
+  }
+}
