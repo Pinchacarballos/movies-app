@@ -12,13 +12,21 @@
 
   <mat-toolbar color="primary">
     <button
+      *ngIf="!canGoBack()"
       mat-icon-button
       (click)="drawer.toggle()"
       aria-label="Example icon-button with menu icon"
     >
       <mat-icon>menu</mat-icon>
     </button>
-    <span #appTitle>{{ 'movies' | translate }}</span>
+    <button
+      *ngIf="canGoBack()"
+      mat-icon-button
+      (click)="navigationService.goBack()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>{{ title$ | async }}</span>
   </mat-toolbar>
 
   <div class="content" role="main">

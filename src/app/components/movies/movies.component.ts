@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
 import { Observable, Subscription } from 'rxjs'
 import { MovieService } from 'src/app/movie/service/movie.service'
+import { AppService } from 'src/app/shared/root.service'
 import { ToastService } from 'src/app/shared/toast.service'
 import { Movie } from '../../movie/model/movie'
 import { MoviesService } from '../../movies/service/movies.service'
@@ -23,7 +24,8 @@ export class MoviesComponent implements OnInit, OnDestroy {
     private movieService: MovieService,
     private translateService: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   async openMovie(movie: Movie) {
+    this.appService.setTitle(movie.title)
     await this.router.navigate(['detail'], {
       relativeTo: this.route
     })

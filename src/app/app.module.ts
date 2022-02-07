@@ -10,10 +10,16 @@ import { environment } from '../environments/environment'
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService
+} from '@ngx-translate/core'
 import { NotFoundComponent } from './components/not-found/not-found.component'
-import { EffectsModule } from '@ngrx/effects'
 import { SharedModule } from './shared/shared.module'
+import * as fromApp from './shared/root.reducer'
+import { EffectsModule } from '@ngrx/effects'
+import { AppService } from './shared/root.service'
 
 const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -25,14 +31,15 @@ const createTranslateLoader = (http: HttpClient) => {
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
+    StoreModule.forFeature(fromApp.appFeatureKey, fromApp.reducer),
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
     }),
     StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
-    HttpClientModule,
     EffectsModule.forRoot([]),
+    HttpClientModule,
     SharedModule,
     TranslateModule.forRoot({
       loader: {
@@ -43,7 +50,7 @@ const createTranslateLoader = (http: HttpClient) => {
       defaultLanguage: 'es'
     })
   ],
-  providers: [],
+  providers: [TranslateService, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -2,13 +2,14 @@
   *ngIf="movie$ | async as movie"
   class="container"
   fxLayout="row"
-  fxLayoutAlign="center"
+  fxLayoutAlign="space-around"
   fxLayout.sm="column"
   fxLayoutAlign.sm="top center"
   fxLayout.lt-sm="column"
   fxLayoutAlign.lt-sm="top center"
 >
   <div
+    fxFlex.xl="0 0 20"
     fxFlex.lg="0 0 35"
     fxFlex.md="0 0 50"
     fxFlex.sm="0 0 80"
@@ -20,6 +21,7 @@
     />
   </div>
   <div
+    fxFlex.xl="0 0 20"
     fxFlex.lg="0 0 35"
     fxFlex.md="0 0 50"
     fxFlex.sm="0 0 80"

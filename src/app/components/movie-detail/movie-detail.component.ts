@@ -5,9 +5,11 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
 import { Observable, Subscriber, Subscription, tap } from 'rxjs'
-import { Actor } from 'src/app/actor/model/actor'
-import { Company } from 'src/app/company/model/company'
+import { Actor } from '../../actor/model/actor'
+import { Company } from '../../company/model/company'
+import { AppService } from '../../shared/root.service'
 import { Movie } from '../../movie/model/movie'
 import { MovieService } from '../../movie/service/movie.service'
 
@@ -21,7 +23,11 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   actors$: Observable<Actor[] | undefined>
   company$: Observable<Company | undefined>
 
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private movieService: MovieService,
+    private appService: AppService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.movie$ = this.movieService
@@ -32,6 +38,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.appService.setTitle(this.translateService.instant('movies'))
     this.movieService.removeSelected()
   }
 
