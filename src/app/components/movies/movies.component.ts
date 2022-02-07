@@ -1,23 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
-import { Observable, startWith } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
+import { MovieService } from 'src/app/movie/service/movie.service'
 import { ToastService } from 'src/app/shared/toast.service'
-import { Movie } from '../../movies/model/movie'
-import { MoviesService } from '../../movies/sotre/movies.service'
+import { Movie } from '../../movie/model/movie'
+import { MoviesService } from '../../movies/service/movies.service'
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit, OnDestroy {
   public movies$: Observable<Movie[]>
   public loading$: Observable<boolean>
+  private errorSubscription: Subscription
 
   constructor(
     private moviesService: MoviesService,
     private toastService: ToastService,
+    private movieService: MovieService,
     private translateService: TranslateService,
     private router: Router,
     private route: ActivatedRoute
@@ -26,17 +29,24 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.movies$ = this.moviesService.getMoviesList$()
     this.loading$ = this.moviesService.isLoading$()
-    this.moviesService.hasError$().subscribe((error) => {
-      if (error) {
-        this.toastService.error(this.translateService.instant(error))
-      }
-    })
+    this.errorSubscription = this.moviesService
+      .hasError$()
+      .subscribe((error) => {
+        if (error) {
+          this.toastService.error(this.translateService.instant(error))
+        }
+      })
   }
 
-  openMovie(movie: Movie) {
-    this.router.navigate(['detail', movie.id], {
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe()
+  }
+
+  async openMovie(movie: Movie) {
+    await this.router.navigate(['detail'], {
       relativeTo: this.route
     })
+    this.movieService.setSelected(movie)
   }
 
   addMovie() {

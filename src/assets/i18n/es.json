@@ -1,5 +1,10 @@
 {
   "movies": "Películas",
   "menu": "Menú",
-  "loadMoviesError": "Se ha producido un error al cargar la lista de películas"
+  "loadMoviesError": "Se ha producido un error al cargar la lista de películas",
+  "duration": "Duración",
+  "rate": "Puntuación",
+  "actors": "Actores",
+  "genres": "Géneros",
+  "company": "Estudio"
 }

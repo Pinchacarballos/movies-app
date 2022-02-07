@@ -1,1 +1,65 @@
-<p>movie-detail works!</p>
+<div
+  *ngIf="movie$ | async as movie"
+  class="container"
+  fxLayout="row"
+  fxLayoutAlign="center"
+  fxLayout.sm="column"
+  fxLayoutAlign.sm="top center"
+  fxLayout.lt-sm="column"
+  fxLayoutAlign.lt-sm="top center"
+>
+  <div
+    fxFlex.lg="0 0 35"
+    fxFlex.md="0 0 50"
+    fxFlex.sm="0 0 80"
+    fxFlex.xs="0 0 100"
+  >
+    <img
+      onerror="this.src='assets/img/default-placeholder.png'"
+      [src]="movie.poster ? movie.poster : 'assets/img/default-placeholder.png'"
+    />
+  </div>
+  <div
+    fxFlex.lg="0 0 35"
+    fxFlex.md="0 0 50"
+    fxFlex.sm="0 0 80"
+    fxFlex.xs="0 0 100"
+    fxLayout="column"
+    class="section"
+  >
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="column">
+        <p class="label-header">{{ 'rate' | translate }}</p>
+        <p class="label-value">{{ movie.imdbRating }}</p>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center end">
+        <p class="label-header">{{ 'duration' | translate }}</p>
+        <p class="label-value">{{ movie.duration | minToHours }}</p>
+      </div>
+    </div>
+    <mat-list class="section">
+      <p class="label-header">{{ 'actors' | translate }}</p>
+      <mat-divider></mat-divider>
+      <mat-list-item
+        class="actor-item label-value"
+        *ngFor="let actor of actors$ | async"
+      >
+        {{ actor.first_name }} {{ actor.last_name }}
+      </mat-list-item>
+    </mat-list>
+    <div class="section">
+      <p class="label-header">{{ 'company' | translate }}</p>
+      <mat-divider></mat-divider>
+      <p class="label-value">{{ (company$ | async)?.name }}</p>
+    </div>
+    <div class="section">
+      <p class="label-header">{{ 'genres' | translate }}</p>
+      <mat-divider class="genres-divider"></mat-divider>
+      <mat-chip-list>
+        <mat-chip *ngFor="let genre of movie.genre"
+          >#{{ genre | lowercase }}</mat-chip
+        >
+      </mat-chip-list>
+    </div>
+  </div>
+</div>

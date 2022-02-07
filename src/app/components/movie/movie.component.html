@@ -9,7 +9,9 @@
   </mat-card-content>
   <mat-card-footer class="movie-footer">
     <mat-chip-list>
-      <mat-chip *ngFor="let genre of movie.genre">#{{ genre }}</mat-chip>
+      <mat-chip *ngFor="let genre of movie.genre"
+        >#{{ genre | lowercase }}</mat-chip
+      >
     </mat-chip-list>
   </mat-card-footer>
 </mat-card>

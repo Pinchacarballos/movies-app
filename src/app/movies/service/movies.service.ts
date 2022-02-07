@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Observable, takeUntil, tap } from 'rxjs'
-import { Movie } from '../model/movie'
-import * as MoviesActions from './movies.atcions'
-import * as MoviesSelectors from './movies.selectors'
+import { combineLatest, Observable, tap } from 'rxjs'
+import { Movie } from '../../movie/model/movie'
+import * as MoviesActions from '../store/movies.atcions'
+import { MoviesState } from '../store/movies.reducer'
+import * as MoviesSelectors from '../store/movies.selectors'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-  constructor(private store: Store<Movie>) {}
+  constructor(private store: Store<MoviesState>) {}
 
   loadMovies() {
     this.store.dispatch(MoviesActions.loadMovies())
   }
 
   getMoviesList$(): Observable<Movie[]> {
-    this.store
-      .select(MoviesSelectors.getMoviesList)
-      .pipe(tap((data) => !data.length && this.loadMovies()))
+    combineLatest([
+      this.hasError$(),
+      this.store.select(MoviesSelectors.getMoviesList)
+    ])
+      .pipe(tap((data) => !data[0] && !data[1].length && this.loadMovies()))
       .subscribe()
     return this.store.select(MoviesSelectors.getMoviesList)
   }
