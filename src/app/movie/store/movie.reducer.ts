@@ -22,11 +22,7 @@ export const initialState: MovieState = {
 const movieReducer = createReducer(
   initialState,
   on(MovieActions.setSelected, (state, { movie }) => {
-    let result = { ...state, movie }
-    if (!movie) {
-      result = { ...state, movie, actors: [], company: undefined }
-    }
-    return result
+    return { ...state, movie, actors: [], company: undefined }
   }),
   on(MovieActions.findActors, (state) => {
     return { ...state, loadingActors: true }

@@ -17,3 +17,13 @@ export const getCompany = createSelector(
   getMovieState,
   (state: MovieState) => state.company
 )
+
+export const isLoadingActors = createSelector(
+  getMovieState,
+  (state: MovieState) => state.loadingActors
+)
+
+export const isLoadingCompany = createSelector(
+  getMovieState,
+  (state: MovieState) => state.loadingCompany
+)

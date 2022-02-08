@@ -38,4 +38,12 @@ export class MovieService {
   getCompany$() {
     return this.store.select(MovieSelectors.getCompany)
   }
+
+  isLoadingActors$() {
+    return this.store.select(MovieSelectors.isLoadingActors)
+  }
+
+  isLoadingCompany$() {
+    return this.store.select(MovieSelectors.isLoadingCompany)
+  }
 }

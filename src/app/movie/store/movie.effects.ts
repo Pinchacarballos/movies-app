@@ -9,24 +9,30 @@ import { CompanyService } from 'src/app/company/service/company.service'
 export class MovieEffects {
   findActors$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MovieActions.findActors),
-      concatMap((action) =>
-        this.actorService.findByIds$(action.actorIds).pipe(
-          map((actors) => MovieActions.findActorsSuccess({ actors })),
-          catchError((_) => of(MovieActions.findActorsError({ actors: [] })))
-        )
+      ofType(MovieActions.findActors, MovieActions.setSelected),
+      switchMap((action) =>
+        action.type === MovieActions.setSelected.type
+          ? of(MovieActions.findActorsSuccess({ actors: [] }))
+          : this.actorService.findByIds$(action.actorIds).pipe(
+              map((actors) => MovieActions.findActorsSuccess({ actors })),
+              catchError((_) =>
+                of(MovieActions.findActorsError({ actors: [] }))
+              )
+            )
       )
     )
   )
 
   findCompany$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MovieActions.findCompany),
+      ofType(MovieActions.findCompany, MovieActions.setSelected),
       concatMap((action) =>
-        this.companyService.findByMovie$(action.movieId).pipe(
-          map((company) => MovieActions.findCompanySuccess({ company })),
-          catchError((_) => of(MovieActions.findCompanyError({})))
-        )
+        action.type === MovieActions.setSelected.type
+          ? of(MovieActions.findCompanySuccess({}))
+          : this.companyService.findByMovie$(action.movieId).pipe(
+              map((company) => MovieActions.findCompanySuccess({ company })),
+              catchError((_) => of(MovieActions.findCompanyError({})))
+            )
       )
     )
   )

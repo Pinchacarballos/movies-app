@@ -22,6 +22,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   movie$: Observable<Movie | undefined>
   actors$: Observable<Actor[] | undefined>
   company$: Observable<Company | undefined>
+  loadActors$: Observable<boolean>
+  loadCompany$: Observable<boolean>
 
   constructor(
     private movieService: MovieService,
@@ -35,6 +37,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       .pipe(tap((movie) => movie && this.loadRelations(movie)))
     this.actors$ = this.movieService.getActors$()
     this.company$ = this.movieService.getCompany$()
+    this.loadActors$ = this.movieService.isLoadingActors$()
+    this.loadCompany$ = this.movieService.isLoadingCompany$()
   }
 
   ngOnDestroy(): void {

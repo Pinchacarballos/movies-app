@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   }
 
   canGoBack() {
-    console.log(this.navigationService.getHistory())
     return this.navigationService.getHistory().length > 1
   }
 }

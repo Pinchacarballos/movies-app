@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store'
 import { Actor } from 'src/app/actor/model/actor'
 import { Movie } from '../../movie/model/movie'
-import * as ActorActions from '../../actor/store/actor.atcions'
 import { Company } from 'src/app/company/model/company'
 
 export const loadMovies = createAction('[Movies] Load Movies')
@@ -43,7 +42,7 @@ export const findCompany = createAction(
 
 export const findCompanySuccess = createAction(
   '[Movie] Find Company Success',
-  props<{ company: Company }>()
+  props<{ company?: Company }>()
 )
 
 export const findCompanyError = createAction(
