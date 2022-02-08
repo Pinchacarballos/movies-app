@@ -12,6 +12,7 @@ import { Company } from '../../company/model/company'
 import { AppService } from '../../shared/root.service'
 import { Movie } from '../../movie/model/movie'
 import { MovieService } from '../../movie/service/movie.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-movie-detail',
@@ -28,7 +29,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   constructor(
     private movieService: MovieService,
     private appService: AppService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     this.company$ = this.movieService.getCompany$()
     this.loadActors$ = this.movieService.isLoadingActors$()
     this.loadCompany$ = this.movieService.isLoadingCompany$()
+    this.movie$.subscribe((movie) => {
+      !movie && this.router.navigateByUrl('/')
+    })
   }
 
   ngOnDestroy(): void {

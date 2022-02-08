@@ -13,7 +13,10 @@ export class NavigationService {
   startSaveHistory(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.history.push(event.urlAfterRedirects)
+        const sameRoute = this.history.indexOf(event.urlAfterRedirects)
+        if (sameRoute === -1) {
+          this.history.push(event.urlAfterRedirects)
+        }
       }
     })
   }
@@ -25,7 +28,7 @@ export class NavigationService {
   goBack(): void {
     this.history.pop()
 
-    if (this.history.length > 0) {
+    if (this.history.length > 1) {
       this.location.back()
     } else {
       this.router.navigateByUrl('/')

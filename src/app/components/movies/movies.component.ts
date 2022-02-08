@@ -53,6 +53,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   addMovie() {
+    this.appService.setTitle(this.translateService.instant('newMovie'))
     this.router.navigate(['new'], {
       relativeTo: this.route
     })
