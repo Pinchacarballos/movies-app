@@ -18,3 +18,15 @@
 .section {
   padding-bottom: 2vh;
 }
+.floating-button {
+  position: fixed;
+  bottom: 35px;
+  right: 100px;
+  background-color: #4f6a40;
+}
+.floating-button-remove {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  background-color: rgb(165, 37, 37);
+}

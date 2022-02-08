@@ -25,6 +25,13 @@ const routes: Routes = [
       )
   },
   {
+    path: 'movies/detail/edit',
+    loadChildren: () =>
+      import('./components/movie-form/movie-form.module').then(
+        (module) => module.MovieFormModule
+      )
+  },
+  {
     path: '',
     redirectTo: '/movies',
     pathMatch: 'full'

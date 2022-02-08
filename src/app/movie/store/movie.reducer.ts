@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store'
-import { Actor } from 'src/app/actor/model/actor'
-import { Company } from 'src/app/company/model/company'
+import { Actor } from '../../actor/model/actor'
+import { Company } from '../../company/model/company'
 import { Movie } from '../../movie/model/movie'
 import * as MovieActions from './movie.atcions'
 

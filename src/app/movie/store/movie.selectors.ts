@@ -27,3 +27,7 @@ export const isLoadingCompany = createSelector(
   getMovieState,
   (state: MovieState) => state.loadingCompany
 )
+
+export const allData = createSelector(getMovieState, (state: MovieState) => {
+  return { movie: state.movie, company: state.company, actors: state.actors }
+})

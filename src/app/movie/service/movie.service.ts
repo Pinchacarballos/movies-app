@@ -46,4 +46,8 @@ export class MovieService {
   isLoadingCompany$() {
     return this.store.select(MovieSelectors.isLoadingCompany)
   }
+
+  getMovieData$() {
+    return this.store.select(MovieSelectors.allData)
+  }
 }

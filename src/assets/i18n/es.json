@@ -7,5 +7,8 @@
   "actors": "Actores",
   "genres": "Géneros",
   "company": "Estudio",
-  "newMovie": "Nueva película"
+  "newMovie": "Nueva película",
+  "title": "Título",
+  "poster": "Póster",
+  "year": "Año"
 }

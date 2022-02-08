@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store'
-import { Actor } from 'src/app/actor/model/actor'
+import { Actor } from '../../actor/model/actor'
 import { Movie } from '../../movie/model/movie'
-import { Company } from 'src/app/company/model/company'
+import { Company } from '../../company/model/company'
 
 export const loadMovies = createAction('[Movies] Load Movies')
 

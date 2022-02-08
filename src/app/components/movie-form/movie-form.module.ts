@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { MovieFormComponent } from './movie-form.component'
 import { RouterModule, Routes } from '@angular/router'
 import { SharedModule } from '../../shared/shared.module'
+import { TranslateModule } from '@ngx-translate/core'
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [MovieFormComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)]
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
+  ]
 })
 export class MovieFormModule {}

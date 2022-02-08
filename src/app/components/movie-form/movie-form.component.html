@@ -1,1 +1,48 @@
-<p>movie-form works!</p>
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+  <form
+    [formGroup]="movieForm"
+    *ngIf="movieForm"
+    fxFlex="0 0 100"
+    fxLayout="column"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'title' | translate }}</mat-label>
+      <input formControlName="title" matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'poster' | translate }} (url)</mat-label>
+      <input formControlName="poster" matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'genres' | translate }}</mat-label>
+      <input
+        matInput
+        #inputGenre
+        id="inputGenre"
+        (keypress)="addGenre($event)"
+      />
+      <mat-chip-list formControlName="genre">
+        <mat-chip
+          *ngFor="let genre of movieForm.get('genre')!!.value"
+          (removed)="remove(genre)"
+          >#{{ genre | lowercase
+          }}<button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button></mat-chip
+        >
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'year' | translate }}</mat-label>
+      <input formControlName="year" matInput type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'duration' | translate }}</mat-label>
+      <input formControlName="duration" matInput type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'rate' | translate }}</mat-label>
+      <input formControlName="imdbRating" matInput type="number" />
+    </mat-form-field>
+  </form>
+</div>

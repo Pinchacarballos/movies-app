@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, concatMap, map, of, switchMap } from 'rxjs'
 import * as MovieActions from './movie.atcions'
 import { ActorService } from '../../actor/service/actor.service'
-import { CompanyService } from 'src/app/company/service/company.service'
+import { CompanyService } from '../../company/service/company.service'
 
 @Injectable()
 export class MovieEffects {

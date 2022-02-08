@@ -13,6 +13,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { MatChipsModule } from '@angular/material/chips'
 import { MatRippleModule } from '@angular/material/core'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 
 @NgModule({
   declarations: [],
@@ -30,7 +32,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     MatGridListModule,
     MatChipsModule,
     MatRippleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class MaterialModule {}

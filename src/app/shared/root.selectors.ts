@@ -7,3 +7,8 @@ export const getTitle = createSelector(
   getAppState,
   (state: AppState) => state.title
 )
+
+export const getMovieEdit = createSelector(
+  getAppState,
+  (state: AppState) => state.movieEdit
+)

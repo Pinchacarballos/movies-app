@@ -77,4 +77,20 @@
       </mat-chip-list>
     </div>
   </div>
+  <button
+    mat-fab
+    *ngIf="!(loadCompany$ | async) && !(loadActors$ | async)"
+    class="floating-button"
+    (click)="edit()"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button
+    mat-fab
+    *ngIf="!(loadCompany$ | async) && !(loadActors$ | async)"
+    class="floating-button-remove"
+    (click)="remove()"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
 </div>

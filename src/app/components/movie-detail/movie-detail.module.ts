@@ -6,7 +6,7 @@ import { SharedModule } from '../../shared/shared.module'
 import { StoreModule } from '@ngrx/store'
 import * as fromMovie from '../../movie/store/movie.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { MovieEffects } from 'src/app/movie/store/movie.effects'
+import { MovieEffects } from '../../movie/store/movie.effects'
 import { TranslateModule } from '@ngx-translate/core'
 
 const routes: Routes = [
