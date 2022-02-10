@@ -5,5 +5,5 @@ export const getActorState = createFeatureSelector<ActorState>(actorFeatureKey)
 
 export const getActors = createSelector(
   getActorState,
-  (state: ActorState) => state.actors
+  (state: ActorState) => state
 )

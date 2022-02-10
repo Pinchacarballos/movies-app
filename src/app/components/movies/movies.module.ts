@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MoviesComponent } from './movies.component'
 import { RouterModule, Routes } from '@angular/router'
-import { StoreModule } from '@ngrx/store'
-import * as fromMovies from '../../movies/store/movies.reducer'
 import { Actions, EffectsModule } from '@ngrx/effects'
-import { MoviesEffects } from '../../movies/store/movies.effects'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { SharedModule } from '../../shared/shared.module'
 import { MovieComponent } from '../movie/movie.component'
+import { StoreModule } from '@ngrx/store'
+import * as fromMovies from '../../movies/store/movies.reducer'
+import { MoviesEffects } from 'src/app/movies/store/movies.effects'
 
 const routes: Routes = [
   {
@@ -22,10 +22,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(fromMovies.moviesFeatureKey, fromMovies.reducer),
     HttpClientModule,
-    EffectsModule.forFeature([MoviesEffects]),
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature(fromMovies.moviesFeatureKey, fromMovies.reducer),
+    EffectsModule.forFeature([MoviesEffects])
   ],
   providers: [HttpClient, Actions]
 })

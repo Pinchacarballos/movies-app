@@ -15,9 +15,10 @@ import { MatRippleModule } from '@angular/material/core'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
+import { MatSelectModule } from '@angular/material/select'
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule],
   exports: [
     FlexLayoutModule,
@@ -34,7 +35,9 @@ import { MatInputModule } from '@angular/material/input'
     MatRippleModule,
     MatProgressBarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {}

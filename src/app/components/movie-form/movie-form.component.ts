@@ -1,8 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MatInput } from '@angular/material/input'
-import { firstValueFrom, lastValueFrom } from 'rxjs'
-import { Actor } from 'src/app/actor/model/actor'
+import { TranslateService } from '@ngx-translate/core'
+import { firstValueFrom, Observable } from 'rxjs'
+import { ActorState } from 'src/app/actor/store/actor.reducer'
+import { CompanyState } from 'src/app/company/store/company.reducer'
+import { Actor } from '../../actor/model/actor'
+import { ActorService } from '../../actor/service/actor.service'
+import { CompanyService } from '../../company/service/company.service'
 import { AppService } from '../../shared/root.service'
 
 @Component({
@@ -13,14 +17,21 @@ import { AppService } from '../../shared/root.service'
 export class MovieFormComponent implements OnInit {
   @ViewChild('inputGenre') inputGenre: ElementRef
   movieForm: FormGroup
+  companyState$: Observable<CompanyState>
+  actorState$: Observable<ActorState>
 
   constructor(
     private appService: AppService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private actorService: ActorService,
+    private companyService: CompanyService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.initializeForm()
+    this.companyState$ = this.companyService.getAll$()
+    this.actorState$ = this.actorService.getAll$()
   }
 
   private async initializeForm() {
@@ -36,17 +47,20 @@ export class MovieFormComponent implements OnInit {
     })
     const movieData = await firstValueFrom(this.appService.getMovieEdit$())
     if (movieData) {
+      this.appService.setTitle(movieData.movie.title)
       const { movie, company, actors } = JSON.parse(JSON.stringify(movieData))
       this.movieForm.patchValue({
         title: movie?.title,
         poster: movie?.poster,
         genre: movie?.genre,
         actors: actors?.map((actor: Actor) => actor.id),
-        company: company,
+        company: company.id,
         year: movie?.year,
         duration: movie?.duration,
         imdbRating: movie?.imdbRating
       })
+    } else {
+      this.appService.setTitle(this.translateService.instant('newMovie'))
     }
   }
 
@@ -67,5 +81,10 @@ export class MovieFormComponent implements OnInit {
       actualValue.splice(index, 1)
     }
     this.movieForm.patchValue({ genre: actualValue })
+  }
+
+  saveMovie() {
+    const movieData = this.movieForm.value
+    console.log(movieData)
   }
 }

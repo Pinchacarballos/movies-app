@@ -7,7 +7,6 @@ import { StoreModule } from '@ngrx/store'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '../environments/environment'
-import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import {
@@ -18,8 +17,14 @@ import {
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { SharedModule } from './shared/shared.module'
 import * as fromApp from './shared/root.reducer'
+import * as fromCompany from './company/store/company.reducer'
+import * as fromActor from './actor/store/actor.reducer'
+
 import { EffectsModule } from '@ngrx/effects'
 import { AppService } from './shared/root.service'
+import { ActorEffects } from './actor/store/actor.effects'
+import { CompanyEffects } from './company/store/company.effects'
+import { MovieEffects } from './movie/store/movie.effects'
 
 const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -30,15 +35,17 @@ const createTranslateLoader = (http: HttpClient) => {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    StoreModule.forFeature(fromApp.appFeatureKey, fromApp.reducer),
+    StoreModule.forRoot({
+      [fromApp.appFeatureKey]: fromApp.reducer,
+      [fromActor.actorFeatureKey]: fromActor.reducer,
+      [fromCompany.companyFeatureKey]: fromCompany.reducer
+    }),
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
     }),
-    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ActorEffects, CompanyEffects, MovieEffects]),
     HttpClientModule,
     SharedModule,
     TranslateModule.forRoot({

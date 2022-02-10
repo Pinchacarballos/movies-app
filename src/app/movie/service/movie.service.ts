@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Movie } from '../model/movie'
+import { MovieEdit } from '../model/movieEdit'
 import * as MovieActions from '../store/movie.atcions'
 import { MovieState } from '../store/movie.reducer'
 import * as MovieSelectors from '../store/movie.selectors'
@@ -49,5 +50,9 @@ export class MovieService {
 
   getMovieData$() {
     return this.store.select(MovieSelectors.allData)
+  }
+
+  save(movieData: MovieEdit) {
+    console.log(movieData)
   }
 }
